@@ -20,10 +20,11 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
         GeometryReader { geometry in
             let layout = GridLayout(itemCount: items.count, in: geometry.size)
             ForEach(items) { item in
-                let idx = items.firstIndex(matching: item)
-                viewForItem(item)
-                    .frame(width: layout.itemSize.width, height: layout.itemSize.height)
-                    .position(layout.location(ofItemAt: idx))
+                if let idx = items.firstIndex(matching: item) {
+                    viewForItem(item)
+                        .frame(width: layout.itemSize.width, height: layout.itemSize.height)
+                        .position(layout.location(ofItemAt: idx))
+                }
             }
         }
     }

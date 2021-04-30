@@ -11,15 +11,25 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
-        Grid(viewModel.cards) { card in
-            CardView(card: card).onTapGesture {
-                viewModel.choose(card: card)
+        NavigationView {
+            VStack {
+                Grid(viewModel.cards) { card in
+                    CardView(card: card).onTapGesture {
+                        viewModel.choose(card: card)
+                    }
+                    .padding(10)
+                }
+                Text("score: \(viewModel.score)")
             }
-            .padding(10)
+            .padding()
+            .foregroundColor(viewModel.theme.color)
+            .navigationBarTitle(viewModel.theme.name)
+            .toolbar {
+                Button("New Game") {
+                    viewModel.resetGame()
+                }
+            }
         }
-        .padding()
-        .foregroundColor(Color.orange)
-
     }
     
     struct CardView: View {
@@ -38,7 +48,9 @@ struct EmojiMemoryGameView: View {
                     RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
                     Text(card.content)
                 } else {
-                    RoundedRectangle(cornerRadius: cornerRadius).fill()
+                    if !card.isMatched {
+                        RoundedRectangle(cornerRadius: cornerRadius).fill()
+                    }
                 }
             }.font(Font.system(size: fontSize(for: size))
             )
