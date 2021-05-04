@@ -56,14 +56,14 @@ struct EmojiMemoryGameView: View {
             )
         }
         
-        func fontSize(for size: CGSize) -> CGFloat {
+        private func fontSize(for size: CGSize) -> CGFloat {
             0.75 * min(size.width, size.height)
         }
         
         // MARK: - Drawing Constants
         
-        let cornerRadius: CGFloat = 10
-        let edgeLineWidth: CGFloat = 3
+        private let cornerRadius: CGFloat = 10
+        private let edgeLineWidth: CGFloat = 3
     }
 }
 

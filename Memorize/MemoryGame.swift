@@ -8,7 +8,7 @@
 import Foundation
 
 struct MemoryGame<CardContent: Equatable> {
-    var cards: Array<Card>
+    private(set) var cards: Array<Card>
     var score: Int
 
     var indexOfOneAndOnlyFaceUpCard: Int? {
